@@ -1,52 +1,64 @@
-﻿/*
-cree una aplicativo de veterinaria
-clases con propiedades: 
-    Mascota: nombre, edad, especie
-    Servicio: descripcion, precio
-    Boleta: codigo, mascota, servicio1, servicio2, total
-
-Use arreglos estáticos de las clases
-Debe tener un menu con estas opciones:
-- crear, eliminar, listar Servicios
-- crear, eliminar, listar Mascotas
-- crear, listar Boletas
-
-Para crear boletas debe seleccionar la Mascota y el Servicio de 
-sus respectivos arreglos
-
-Divida entre sus integrantes, el lider consolida y los integrantes uno hace lo de servicios y el otro el de mascotas
-Debe tener una rama por integrante, el lider debe tener por lo menos 2 ramas: main y dev. debe trabajar y consolidar en dev
-*/
-using System;
-
-class Program
+﻿public class Program
 {
-    static void Main(string[] args)
-    {
+    static Mascota[] mascotas = new Mascota[10];
+    static Servicio[] servicios = new Servicio[5];
+    static Boleta[] boletas = new Boleta[10];
 
-        while (true)
+    public static void Main()
+    {
+        int opcion;
+        do
         {
-            Console.WriteLine("1. Crear Servicio");
-            Console.WriteLine("2. Eliminar Servicio");
-            Console.WriteLine("3. Listar Servicios");
-            Console.WriteLine("4. Crear Mascota");
-            Console.WriteLine("5. Eliminar Mascota");
-            Console.WriteLine("6. Listar Mascotas");
+            Console.Clear();
+            Console.WriteLine("Bienvenido a la Veterinaria. Selecciona una opción:");
+            Console.WriteLine("1. Crear Mascota");
+            Console.WriteLine("2. Eliminar Mascota");
+            Console.WriteLine("3. Listar Mascotas");
+            Console.WriteLine("4. Crear Servicio");
+            Console.WriteLine("5. Eliminar Servicio");
+            Console.WriteLine("6. Listar Servicios");
             Console.WriteLine("7. Crear Boleta");
             Console.WriteLine("8. Listar Boletas");
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("9. Salir");
+            Console.Write("Opción: ");
+            opcion = int.Parse(Console.ReadLine());
 
-            string option = Console.ReadLine();
-
-            switch (option)
+            switch (opcion)
             {
-                case "1":
+                case 1:
+                    Mascota.CrearMascota(mascotas);
                     break;
-                case "2":
+                case 2:
+                    Mascota.EliminarMascota(mascotas);
                     break;
-                case "0":
-                    return;
+                case 3:
+                    Mascota.ListarMascotas(mascotas);
+                    break;
+                case 4:
+                    Servicio.CrearServicio(servicios);
+                    break;
+                case 5:
+                    Servicio.EliminarServicio(servicios);
+                    break;
+                case 6:
+                    Servicio.ListarServicios(servicios);
+                    break;
+                case 7:
+                    Boleta.CrearBoleta(boletas, mascotas, servicios);
+                    break;
+                case 8:
+                    Boleta.ListarBoletas(boletas);
+                    break;
+                case 9:
+                    Console.WriteLine("¡Hasta pronto!");
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida.");
+                    break;
             }
-        }
+
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+        } while (opcion != 9);
     }
 }
